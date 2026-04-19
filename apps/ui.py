@@ -1,5 +1,3 @@
-# Shared colour palette and drawing helpers for all apps
-
 # Backgrounds
 C_BG         = (6,   8,  10)
 C_PANEL      = (14,  18,  22)

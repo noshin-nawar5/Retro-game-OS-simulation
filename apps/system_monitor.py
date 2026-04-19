@@ -1,6 +1,8 @@
-from apps.ui import (C_BG, C_PANEL, C_PANEL_ALT, C_BORDER, C_BORDER_DIM,
-                     C_GREEN, C_GREEN_DIM, C_GREEN_DARK,
-                     C_AMBER, C_RED, C_BLUE, C_CYAN, C_WHITE, C_GREY,
+from kernel.process import Process
+from apps.ui import (C_PANEL, C_BORDER, C_BORDER_DIM,
+                     C_GREEN, C_GREEN_DIM,
+                     C_AMBER, C_RED, C_BLUE, C_CYAN, C_CYAN_DIM,
+                     C_WHITE, C_GREY, C_GREY_DIM,
                      draw_progress_bar, pid_color)
 
 
@@ -18,95 +20,135 @@ class SystemMonitor:
         sched     = self.os.scheduler
         processes = sched.get_all_processes()
 
-        # Background
-        self.os.draw_rect(0, 0, 160, 144, (5, 7, 11))
+        self.os.draw_rect(0, 0, 160, 144, (4, 6, 10))
 
-        # ── TITLE BAR ────────────────────────────────────────────────
-        self.os.draw_rect(0, 0, 160, 11, (12, 18, 32))
+        # ── TITLE ────────────────────────────────────────────────────
+        self.os.draw_rect(0, 0, 160, 11, (9, 14, 26))
         self.os.draw_rect(0, 10, 160, 1, C_BORDER)
-        self.os.draw_rect(0,  0,   3, 11, C_CYAN)
-        self.os.draw_text(6,  2, "SYSTEM MONITOR", color=C_CYAN)
-        self.os.draw_text(112, 2, "ESC=BACK",       color=(30, 50, 90))
+        self.os.draw_rect(0,  0,  3, 11, C_CYAN)
+        self.os.draw_text(6,  2, "TASK CTRL", color=C_CYAN)
+        self.os.draw_text(112, 2, "ESC=BACK",       color=(22, 36, 72))
 
-        # ── KERNEL STATS ROW ─────────────────────────────────────────
+        # ── KERNEL STATS ─────────────────────────────────────────────
         ky = 13
-        self.os.draw_rect(0, ky, 160, 12, C_PANEL)
-        self.os.draw_rect(0, ky+11, 160, 1, C_BORDER_DIM)
+        self.os.draw_rect(0, ky, 160, 13, C_PANEL)
+        self.os.draw_rect(0, ky+12, 160, 1, C_BORDER_DIM)
 
-        self.os.draw_text(3,  ky+3, "TICK",  color=(40, 60, 100))
-        self.os.draw_text(27, ky+3, str(sched.tick), color=C_BLUE)
+        self.os.draw_text(3,  ky+2, "TICK", color=C_GREY)
+        self.os.draw_text(27, ky+2, str(sched.tick % 9999), color=C_BLUE)
 
-        self.os.draw_text(60,  ky+3, "CTX",  color=(40, 60, 100))
-        self.os.draw_text(84,  ky+3, str(sched.context_switches), color=C_AMBER)
+        ctx_col = C_AMBER if sched.ctx_flash > 0 else C_GREEN_DIM
+        self.os.draw_text(55, ky+2, "CTX", color=C_GREY)
+        self.os.draw_text(75, ky+2, str(sched.context_switches), color=ctx_col)
 
         used = sched.memory_manager.get_used()
-        self.os.draw_text(112, ky+3, "MEM",  color=(40, 60, 100))
-        self.os.draw_text(130, ky+3, str(used) + "/256", color=C_GREEN)
+        self.os.draw_text(100, ky+2, "MEM", color=C_GREY)
+        self.os.draw_text(118, ky+2, str(used)+"/256", color=C_GREEN)
+
+        # CPU load bar
+        self.os.draw_text(3,   ky+8, "CPU", color=C_GREY)
+        draw_progress_bar(self.os, 22, ky+9, 100, 3,
+                          sched.cpu_load, 100, C_GREEN)
+        self.os.draw_text(124, ky+8, str(sched.cpu_load)+"%", color=C_GREEN_DIM)
 
         # ── COLUMN HEADERS ───────────────────────────────────────────
-        hy = 27
-        self.os.draw_rect(0, hy, 160, 9, (14, 20, 36))
+        hy = 28
+        self.os.draw_rect(0, hy, 160, 9, (11, 17, 30))
         self.os.draw_rect(0, hy+8, 160, 1, C_BORDER)
-        hdr_col = (50, 80, 140)
-        self.os.draw_text(4,   hy+2, "PID",      color=hdr_col)
-        self.os.draw_text(22,  hy+2, "PROCESS",  color=hdr_col)
-        self.os.draw_text(76,  hy+2, "STATE",    color=hdr_col)
-        self.os.draw_text(110, hy+2, "MEM",      color=hdr_col)
-        self.os.draw_text(128, hy+2, "CPU",      color=hdr_col)
+        hc = (44, 72, 128)
+        self.os.draw_text(4,   hy+2, "PID",      color=hc)
+        self.os.draw_text(28,  hy+2, "PROCESS",  color=hc)
+        self.os.draw_text(74,  hy+2, "STATE",    color=hc)
+        self.os.draw_text(108, hy+2, "MEM",      color=hc)
+        self.os.draw_text(128, hy+2, "CPU", color=hc)
 
         # ── PROCESS ROWS ─────────────────────────────────────────────
         ROW_H   = 16
-        START_Y = 37
+        START_Y = 38
         max_cpu = max((p.cpu_time for p in processes), default=1)
 
         for i, p in enumerate(processes):
             ry = START_Y + i * ROW_H
-            if ry + ROW_H > 134:
+            if ry + ROW_H > 130:
                 break
 
-            bg = (10, 15, 24) if i % 2 == 0 else (8, 12, 20)
+            bg = (8, 13, 21) if i % 2 == 0 else (6, 10, 17)
             self.os.draw_rect(0, ry, 160, ROW_H-1, bg)
 
-            # State indicator stripe on left
+            if p is sched.foreground_process:
+                self.os.draw_rect(0, ry, 160, 1, (28, 42, 80))
+
             if p.state == "RUNNING":
-                stripe = C_GREEN;  row_col = C_GREEN
+                stripe, rc = C_GREEN, C_GREEN
+            elif p.state == "WAITING":
+                stripe, rc = C_CYAN, C_CYAN
             elif p.state == "READY":
-                stripe = C_AMBER;  row_col = C_AMBER
+                stripe, rc = C_AMBER, C_AMBER
             else:
-                stripe = C_GREY;   row_col = C_GREY
+                stripe, rc = C_GREY, C_GREY
             self.os.draw_rect(0, ry, 3, ROW_H-1, stripe)
 
-            # PID colour dot
             pc = pid_color(p.pid)
-            self.os.draw_rect(6, ry+4, 4, 5, pc)
-            self.os.draw_text(13, ry+4, str(p.pid), color=row_col)
-
-            # App name
-            self.os.draw_text(22, ry+4, p.app.__class__.__name__[:9], color=row_col)
+            self.os.draw_rect(5, ry+4, 4, 5, pc)
+            self.os.draw_text(12, ry+4, str(p.pid), color=rc)
+            self.os.draw_text(22, ry+4, p.app.__class__.__name__[:9], color=rc)
 
             # State badge
             if p.state == "RUNNING":
-                bb, bc = (0, 40, 20),  C_GREEN
+                bb, bc = (0, 36, 17),  C_GREEN
+            elif p.state == "WAITING":
+                bb, bc = (0, 28, 36),  C_CYAN
             elif p.state == "READY":
-                bb, bc = (50, 35, 0),  C_AMBER
+                bb, bc = (46, 32, 0),  C_AMBER
             else:
-                bb, bc = (40, 10, 10), C_RED
-            self.os.draw_rect(76,  ry+2, 30, 9, bb)
-            self.os.draw_border(76, ry+2, 30, 9, bc)
-            self.os.draw_text(78, ry+4, p.state[:5], color=bc)
+                bb, bc = (36, 10, 10), C_RED
+            self.os.draw_rect(74, ry+2, 30, 9, bb)
+            self.os.draw_border(74, ry+2, 30, 9, bc)
+            lbl = p.state[:4] if p.state != "WAITING" else "WAIT"
+            self.os.draw_text(76, ry+4, lbl, color=bc)
 
-            # Memory
-            self.os.draw_text(110, ry+4, str(p.memory_needed), color=C_GREEN_DIM)
+            if p.state == "WAITING":
+                draw_progress_bar(self.os, 74, ry+11, 30, 2,
+                                  p.wait_timer, 60, C_CYAN_DIM)
 
-            # CPU time + bar
-            self.os.draw_text(128, ry+4, str(p.cpu_time), color=C_GREEN_DIM)
-            draw_progress_bar(self.os, 128, ry+11, 28, 2, p.cpu_time, max_cpu, pc)
+            self.os.draw_text(108, ry+4, str(p.memory_needed), color=C_GREEN_DIM)
+
+            # Sparkline (last 12 ticks)
+            sx   = 124
+            idx0 = (p._h_idx - 12) % Process.HISTORY_LEN
+            for j in range(12):
+                val = p.cpu_history[(idx0+j) % Process.HISTORY_LEN]
+                sc  = pc if val else C_GREY_DIM
+                bh  = 5 if val else 2
+                self.os.draw_rect(sx + j*3, ry+3 + (6-bh), 2, bh, sc)
 
             self.os.draw_rect(0, ry+ROW_H-1, 160, 1, C_BORDER_DIM)
 
-        # ── FOOTER ───────────────────────────────────────────────────
-        self.os.draw_rect(0, 134, 160, 10, C_PANEL)
-        self.os.draw_rect(0, 134, 160,  1, C_BORDER_DIM)
-        self.os.draw_text(4, 137,
-            str(len(processes)) + " PROCS   Q=" + str(sched.time_quantum),
-            color=(35, 55, 95))
+        # ── READY QUEUE STRIP ─────────────────────────────
+        qy = 124
+        self.os.draw_rect(0, qy, 160, 14, C_PANEL)
+        self.os.draw_rect(0, qy, 160, 1, C_BORDER_DIM)
+
+        self.os.draw_text(3, qy+4, "QUEUE", color=C_GREY)
+
+        rq = sched.get_ready_queue()[:5]
+
+        start_x = 38
+        box_w = 18
+        gap = 4
+
+        for i, p in enumerate(rq):
+            qx = start_x + i * (box_w + gap)
+
+            pc = pid_color(p.pid)
+
+            self.os.draw_rect(qx, qy+2, box_w, 9, (14,18,30))
+            self.os.draw_border(qx, qy+2, box_w, 9, pc)
+
+            label = str(p.pid)
+            self.os.draw_text(qx+5, qy+4, label, color=pc)
+
+        if not rq:
+            self.os.draw_text(38, qy+4, "EMPTY", color=C_GREY_DIM)
+
+

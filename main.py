@@ -25,15 +25,15 @@ os_api = OS_API(display, scheduler, input_device)
 
 # ---------- LAUNCHER — PID 1, foreground at boot ----------
 launcher         = Launcher(os_api)
-launcher_process = Process(pid=scheduler.generate_pid(), app=launcher, memory_needed=10)
+launcher_process = Process(pid=scheduler.generate_pid(),
+                           app=launcher, memory_needed=10)
 scheduler.add_process(launcher_process)
 scheduler.foreground_process = launcher_process
 
-# ---------- DASHBOARD — allocated but NOT in scheduler ----------
-# Drawn directly from main loop every frame so it never causes a blank tick.
+# ---------- DASHBOARD — memory allocated but NOT in scheduler ----------
 dashboard = SystemDashboard(os_api)
 dash_pid  = scheduler.generate_pid()
-memory.allocate(dash_pid, 5)   # shows in memory map
+memory.allocate(dash_pid, 5)   # visible in memory map
 
 # ---------- MAIN LOOP ----------
 running = True
@@ -49,10 +49,10 @@ while running:
 
     input_device.update()
 
-    display.clear()          # wipe framebuffer (one numpy fill)
-    scheduler.schedule()     # run foreground app
-    dashboard.draw_overlay() # HUD always on top
-    display.render()         # single blit to screen
+    display.clear()
+    scheduler.schedule()
+    dashboard.draw_overlay()
+    display.render()
 
     clock.tick(60)
 

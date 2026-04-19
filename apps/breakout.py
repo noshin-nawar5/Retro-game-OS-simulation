@@ -122,8 +122,8 @@ class Breakout:
         self.os.draw_rect(0, 0, 160, 11, C_PANEL)
         self.os.draw_rect(0, 10, 160, 1, C_BORDER_DIM)
         self.os.draw_text(2,  2, "BREAKOUT",          color=C_CYAN)
-        self.os.draw_text(68, 2, str(self.score),     color=C_WHITE)
-        self.os.draw_text(96, 2, "ESC=QUIT",          color=(20,20,50))
+        self.os.draw_text(68, 2, "SCORE: " + str(self.score),     color=C_WHITE)
+        #self.os.draw_text(96, 2, "LIVES",          color=(20,20,50))
         for i in range(self.lives):
             self.os.draw_rect(138 + i*7, 3, 5, 5, C_GREEN)
 
@@ -168,7 +168,7 @@ class Breakout:
         self.os.draw_border(22, 52, 116, 48, col)
         self.os.draw_rect(23, 53, 114, 10,
                           (38, 10, 20) if self.dead else (10, 38, 20))
-        self.os.draw_text(36,  55, title,                      color=col)
-        self.os.draw_text(34,  67, "SCORE " + str(self.score), color=C_WHITE)
-        self.os.draw_text(28,  79, "ENTER=RETRY",              color=C_GREEN_DIM)
-        self.os.draw_text(28,  89, "ESC=QUIT",                 color=C_GREY)
+        self.os.draw_text(38,  55, title,                      color=col)
+        self.os.draw_text(28,  67, "SCORE " + str(self.score), color=C_WHITE)
+        self.os.draw_text(28,  79, "ENTER = RETRY",              color=C_GREEN_DIM)
+        self.os.draw_text(28,  89, "ESC = QUIT",                 color=C_GREY)

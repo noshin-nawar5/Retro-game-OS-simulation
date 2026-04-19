@@ -43,3 +43,10 @@ class OS_API:
 
     def kill_foreground(self):
         self.scheduler.kill_foreground()
+
+    def block_process(self, ticks=30):
+        """Put current foreground process into WAITING (simulates I/O block)."""
+        p = self.scheduler.current_process
+        if p:
+            p.state      = "WAITING"
+            p.wait_timer = ticks
