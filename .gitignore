@@ -1,0 +1,75 @@
+# ==================================================
+# RetroCore OS / Python Project .gitignore
+# ==================================================
+
+# ---------- Python cache ----------
+__pycache__/
+*.py[cod]
+*$py.class
+
+# ---------- Compiled files ----------
+*.so
+*.pyd
+*.dll
+
+# ---------- Virtual environments ----------
+venv/
+.venv/
+env/
+ENV/
+
+# ---------- VS Code ----------
+.vscode/
+
+# ---------- JetBrains / PyCharm ----------
+.idea/
+
+# ---------- Build / Distribution ----------
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# ---------- Logs ----------
+*.log
+
+# ---------- OS generated files ----------
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ---------- Test / coverage ----------
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+
+# ---------- Jupyter ----------
+.ipynb_checkpoints/
+
+# ---------- Temporary files ----------
+*.tmp
+*.temp
+*.bak
+*.swp
+
+# ---------- Local settings / secrets ----------
+.env
+.env.*
+
+# ---------- Runtime save data (optional) ----------
+save.json
+state.json
+
+# ---------- Pygame generated screenshots (optional) ----------
+*.png~
+*.jpg~
+
+# ---------- MyPy / lint caches ----------
+.mypy_cache/
+.ruff_cache/
+
+# ---------- Ignore executable outputs ----------
+*.exe
+*.app
