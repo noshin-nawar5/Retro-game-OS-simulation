@@ -12,7 +12,33 @@ The system is designed as a **“glass-box OS”**, allowing users to observe ho
 
 ---
 
-## 2. Features
+## 2. Screenshots
+
+### Main Menu
+![Main Menu](screenshots/main-menu.png)
+
+### Kernel Lab
+![Kernel Lab](screenshots/kernel-lab.png)
+
+### Task Ctrl
+![Task Ctrl](screenshots/task-ctrl.png)
+
+### Memory Grid
+![Memory Grid](screenshots/memory-grid.png)
+
+### Pong
+![Pong](screenshots/pong.png)
+
+### Snake
+![Snake](screenshots/snake.png)
+
+### Breakout
+![Breakout](screenshots/breakout.png)
+
+---
+
+
+## 3. Features
 
 ### Core OS Functionality
 
@@ -53,7 +79,7 @@ The system is designed as a **“glass-box OS”**, allowing users to observe ho
 
 ---
 
-## 3. System Architecture
+## 4. System Architecture
 
 ```
 User Apps (Games / Tools)
@@ -71,7 +97,7 @@ User Apps (Games / Tools)
 
 ---
 
-## 4. How It Works
+## 5. How It Works
 
 * Each app runs as a **process**
 * Scheduler manages execution:
@@ -84,7 +110,7 @@ User Apps (Games / Tools)
 
 ---
 
-## 5. Controls
+## 6. Controls
 
 | Key   | Action        |
 | ----- | ------------- |
@@ -96,29 +122,22 @@ User Apps (Games / Tools)
 
 ---
 
-## 6. Installation
+## 7. Installation
 
 ### Requirements
 
-* Python 3.x
-* Pygame
-* NumPy
+- Python 3.x
+- Dependencies listed in `requirements.txt`
 
 ### Install dependencies
 
 ```bash
-pip install pygame numpy
+pip install -r requirements.txt
+
 ```
-
-### Run
-
-```bash
-python main.py
-```
-
 ---
 
-## 7. Project Structure
+## 8. Project Structure
 
 ```
 kernel/
@@ -147,7 +166,7 @@ main.py
 
 ---
 
-## 8. Strengths
+## 9. Strengths
 
 * Clear demonstration of OS concepts
 * Clean modular architecture
@@ -157,7 +176,7 @@ main.py
 
 ---
 
-## 9. Limitations
+## 10. Limitations
 
 * Fixed logical resolution (160×144)
 * No process priority or blocking states
@@ -166,7 +185,7 @@ main.py
 
 ---
 
-## 10. Future Improvements
+## 11. Future Improvements
 
 * Dynamic resolution support
 * Visual scheduler queue display
@@ -177,7 +196,7 @@ main.py
 
 ---
 
-## 11. Conclusion
+## 12. Conclusion
 
 RetroCore OS successfully demonstrates how an operating system manages processes, memory, and execution flow in a simplified yet visually intuitive way. It bridges theoretical OS concepts with interactive simulation, making it a useful educational tool.
 
