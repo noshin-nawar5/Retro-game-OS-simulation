@@ -6,6 +6,9 @@ class OS_API:
         self.display      = display
         self.scheduler    = scheduler
         self.input_device = input_device
+        # Shared kernel event bus — games write here, OS Monitor reads here
+        self._event_log  = []
+        self._MAX_EVENTS = 20
 
     def draw_pixel(self, x, y, color):
         self.display.draw_pixel(x, y, color)
@@ -24,6 +27,17 @@ class OS_API:
 
     def get_input(self):
         return self.input_device.get_keys()
+
+    def log_event(self, text, color=(0, 180, 80)):
+        """
+        Games and kernel components call this to push a real event
+        into the shared log. OS Monitor reads self.os._event_log.
+        """
+        pid = self.get_pid()
+        full = ("PID" + str(pid) + " " + text) if pid else text
+        self._event_log.append((full, color))
+        if len(self._event_log) > self._MAX_EVENTS:
+            self._event_log = self._event_log[-self._MAX_EVENTS:]
 
     def exit_process(self):
         p = self.scheduler.current_process
@@ -45,7 +59,7 @@ class OS_API:
         self.scheduler.kill_foreground()
 
     def block_process(self, ticks=30):
-        """Put current foreground process into WAITING (simulates I/O block)."""
+        """Put current process into WAITING state (simulates I/O block)."""
         p = self.scheduler.current_process
         if p:
             p.state      = "WAITING"
