@@ -2,8 +2,8 @@ import pygame
 from apps.pong           import Pong
 from apps.snake          import Snake
 from apps.breakout       import Breakout
-from apps.os_monitor     import OSMonitor
-from apps.system_monitor import SystemMonitor
+from apps.kernel_lab     import OSMonitor
+from apps.task_ctrl import SystemMonitor
 from apps.memory_viewer  import MemoryViewer
 from apps.ui import (C_PANEL, C_BORDER, C_BORDER_DIM,
                      C_GREEN, C_GREEN_DIM, C_GREEN_DARK,

@@ -157,6 +157,7 @@ apps/
   snake.py
   breakout.py
   system_monitor.py
+  os_monitor.py
   memory_viewer.py
   system_dashboard.py
   ui.py

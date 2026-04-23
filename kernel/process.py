@@ -1,10 +1,4 @@
 class Process:
-    """
-    Extended process model.
-    States: NEW -> READY -> RUNNING -> WAITING -> READY -> ... -> TERMINATED
-    cpu_history : ring buffer of last 30 ticks (1=active 0=idle) for sparkline
-    wait_timer  : ticks remaining in WAITING state (simulates I/O block)
-    """
 
     HISTORY_LEN = 30
 

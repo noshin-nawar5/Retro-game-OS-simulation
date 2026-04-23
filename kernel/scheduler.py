@@ -1,11 +1,4 @@
 class RoundRobinScheduler:
-    """
-    Glass-box scheduler — exposes all internals for live visualization.
-    ready_queue      : ordered list of READY/waiting-to-run processes
-    last_switch_tick : tick of last context switch
-    cpu_load         : rolling 0-100 utilisation (last 60 ticks)
-    ctx_flash        : countdown after each context switch (for flash indicator)
-    """
 
     CTX_FLASH_TICKS = 8
 

@@ -1,10 +1,4 @@
 class MemoryManager:
-    """
-    Extended memory manager.
-    change_age[i]  : counts down from FADE_TICKS when block i changes (alloc or free)
-    fragmentation(): 0.0=none  1.0=fully fragmented
-    tick()         : called each frame to age down highlights
-    """
 
     FADE_TICKS = 20
 
@@ -52,10 +46,7 @@ class MemoryManager:
         return self.total_size - self.get_used()
 
     def fragmentation(self):
-        """
-        External fragmentation: 1 - (largest_free_run / total_free).
-        0.0 = no fragmentation, 1.0 = fully fragmented.
-        """
+
         free_total = self.get_free()
         if free_total == 0:
             return 0.0
