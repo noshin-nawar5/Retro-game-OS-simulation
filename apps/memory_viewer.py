@@ -5,7 +5,7 @@ from apps.ui import (C_PANEL, C_BORDER, C_BORDER_DIM,
                      pid_color, draw_progress_bar)
 
 
-class MemoryViewer:
+class Memory:
     FREE = (11, 17, 27)
     CELL = 4
     COLS = 32

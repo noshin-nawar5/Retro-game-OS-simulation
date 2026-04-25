@@ -29,10 +29,7 @@ class OS_API:
         return self.input_device.get_keys()
 
     def log_event(self, text, color=(0, 180, 80)):
-        """
-        Games and kernel components call this to push a real event
-        into the shared log. OS Monitor reads self.os._event_log.
-        """
+  
         pid = self.get_pid()
         full = ("PID" + str(pid) + " " + text) if pid else text
         self._event_log.append((full, color))
@@ -59,7 +56,6 @@ class OS_API:
         self.scheduler.kill_foreground()
 
     def block_process(self, ticks=30):
-        """Put current process into WAITING state (simulates I/O block)."""
         p = self.scheduler.current_process
         if p:
             p.state      = "WAITING"

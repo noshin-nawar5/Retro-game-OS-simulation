@@ -2,9 +2,9 @@ import pygame
 from apps.pong           import Pong
 from apps.snake          import Snake
 from apps.breakout       import Breakout
-from apps.kernel_lab     import OSMonitor
-from apps.task_ctrl import SystemMonitor
-from apps.memory_viewer  import MemoryViewer
+from apps.kernel_lab     import KERNAL
+from apps.task_ctrl import TASKCTRL
+from apps.memory_viewer  import Memory
 from apps.ui import (C_PANEL, C_BORDER, C_BORDER_DIM,
                      C_GREEN, C_GREEN_DIM, C_GREEN_DARK,
                      C_BLUE, C_CYAN, C_GREY, C_BG)
@@ -13,8 +13,8 @@ ENTRY_COLORS = [
     ((20, 30, 80),  (80,  160, 255)),   # PONG
     ((10, 40, 20),  (0,   220, 100)),   # SNAKE
     ((40, 15, 50),  (170,  90, 240)),   # BREAKOUT
-    ((0,  30, 40),  (60,  210, 210)),   # OS MONITOR
-    ((8,  32, 32),  (50,  180, 180)),   # SYS MON
+    ((0,  30, 40),  (60,  210, 210)),   # KERNAL LAB
+    ((8,  32, 32),  (50,  180, 180)),   # TASK CTRL
     ((38, 28, 8),   (255, 185,  40)),   # MEM VIEW
     ((40, 10, 10),  (220,  55,  55)),   # SHUTDOWN
 ]
@@ -22,9 +22,9 @@ MENU = [
     ("PONG",           "P", Pong,          10),
     ("SNAKE",          "S", Snake,         10),
     ("BREAKOUT",       "B", Breakout,      10),
-    ("KERNEL LAB",     "O", OSMonitor,      6),
-    ("TASK CTRL", "M", SystemMonitor,  8),
-    ("MEMORY GRID",  "V", MemoryViewer,   8),
+    ("KERNEL LAB",     "O", KERNAL,         6),
+    ("TASK CTRL",      "M", TASKCTRL,       8),
+    ("MEMORY GRID",  "V", Memory,     8),
     ("SHUTDOWN",       "X", None,           0),
 ]
 

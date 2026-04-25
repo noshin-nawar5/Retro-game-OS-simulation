@@ -6,7 +6,7 @@ from apps.ui import (C_PANEL, C_BORDER, C_BORDER_DIM,
                      draw_progress_bar, pid_color)
 
 
-class SystemMonitor:
+class TASKCTRL:
 
     def __init__(self, os_api):
         self.os = os_api

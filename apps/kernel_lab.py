@@ -16,7 +16,7 @@ _ROW_A   = (9,  13,  22)
 _ROW_B   = (7,  10,  17)
 
 
-class OSMonitor:
+class KERNAL:
 
     MAX_LOG = 10
 
@@ -222,7 +222,7 @@ class OSMonitor:
         self.os.draw_text(tx+22,  hy+1, "NAME",  color=hc)
         self.os.draw_text(tx+70,  hy+1, "STATE", color=hc)
         self.os.draw_text(tx+102, hy+1, "MEM",   color=hc)
-        self.os.draw_text(tx+120, hy+1, "CPU USAGE", color=hc)
+        self.os.draw_text(tx+120, hy+1, "  CPU%", color=hc)
 
         # Process rows — 11px each
         ROW_H   = 11
