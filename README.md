@@ -15,25 +15,25 @@ The system is designed as a **“glass-box OS”**, allowing users to observe ho
 ## 2. Screenshots
 
 ### Main Menu
-![Main Menu](screenshots/main-menu.png)
+![Main Menu](Screenshots/main-menu.png)
 
 ### Kernel Lab
-![Kernel Lab](screenshots/kernel-lab.png)
+![Kernel Lab](Screenshots/kernel-lab.png)
 
 ### Task Ctrl
-![Task Ctrl](screenshots/task-ctrl.png)
+![Task Ctrl](Screenshots/task-ctrl.png)
 
 ### Memory Grid
-![Memory Grid](screenshots/memory-grid.png)
+![Memory Grid](Screenshots/memory-grid.png)
 
 ### Pong
-![Pong](screenshots/pong.png)
+![Pong](Screenshots/pong.png)
 
 ### Snake
-![Snake](screenshots/snake.png)
+![Snake](Screenshots/snake.png)
 
 ### Breakout
-![Breakout](screenshots/breakout.png)
+![Breakout](Screenshots/breakout.png)
 
 ---
 
