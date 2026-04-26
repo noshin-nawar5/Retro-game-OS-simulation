@@ -27,13 +27,13 @@ The system is designed as a **“glass-box OS”**, allowing users to observe ho
 ![Memory Grid](Screenshots/memory-grid.png)
 
 ### Pong
-![Pong](Screenshots/pong.png)
+![Pong](Screenshots/Pong.png)
 
 ### Snake
-![Snake](Screenshots/snake.png)
+![Snake](Screenshots/Snake.png)
 
 ### Breakout
-![Breakout](Screenshots/breakout.png)
+![Breakout](Screenshots/Breakout.png)
 
 ---
 
