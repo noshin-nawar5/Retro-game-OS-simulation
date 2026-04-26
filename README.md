@@ -18,7 +18,7 @@ The system is designed as a **“glass-box OS”**, allowing users to observe ho
 ![Main Menu](Screenshots/main-menu.png)
 
 ### Kernel Lab
-![Kernel Lab](Screenshots/kernel-lab.png)
+![Kernel Lab](Screenshots/kernal-lab.png)
 
 ### Task Ctrl
 ![Task Ctrl](Screenshots/task-ctrl.png)
