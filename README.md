@@ -27,10 +27,10 @@ The system is designed as a **“glass-box OS”**, allowing users to observe ho
 ![Memory Grid](Screenshots/memory-grid.png)
 
 ### Pong
-![Pong](Screenshots/pong.png)
+![Pong](C:\Users\adoc\Desktop\Retro-game-OS-simulation\Screenshots\pong.png)
 
 ### Snake
-![Snake](C:\Users\adoc\Desktop\Retro-game-OS-simulation\Screenshots\pong.png)
+![Snake](Screenshots/snake.png)
 
 ### Breakout
 ![Breakout](Screenshots/breakout.png)
