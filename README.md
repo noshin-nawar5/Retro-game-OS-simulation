@@ -41,7 +41,7 @@ Click the image below to watch the demo:
 
 [![Watch Demo](Screenshots/kernal-lab.png)](demo/Retrodemo.mp4)
 
-Or download directly: [demo.mp4](demo/Retrodemo.mp4)
+Or download directly: [Retrodemo.mp4](demo/Retrodemo.mp4)
 
 ---
 
