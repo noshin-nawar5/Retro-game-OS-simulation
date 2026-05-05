@@ -39,9 +39,9 @@ The system is designed as a **"glass-box OS"**: every internal kernel operation 
 
 Click the image below to watch the demo:
 
-[![Watch Demo](Screenshots/kernal-lab.png)](demo/Retrodemo.mp4)
+[![Watch Demo](Screenshots/kernal-lab.png)](Demo/Retrodemo.mp4)
 
-Or download directly: [Retrodemo.mp4](demo/Retrodemo.mp4)
+Or download directly: [Retrodemo.mp4](Demo/Retrodemo.mp4)
 
 ---
 
